@@ -5,6 +5,10 @@ VisualStudioVersion = 17.11.35208.52
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabAssistantOCR", "LabAssistantOCR\LabAssistantOCR.csproj", "{E00D8D4B-21AD-4302-ABF3-3BBB42AEA642}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabAssistantOCR.EngineOCR", "LabAssistantOCR.EngineOCR\LabAssistantOCR.EngineOCR.csproj", "{ED4DA24D-0176-44A7-B0FB-F25FC212D2A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabAssistantOCR.Console", "LabAssistantOCR.Console\LabAssistantOCR.Console.csproj", "{40C4156C-E932-439E-B8F1-B8C3BFED3BBE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{E00D8D4B-21AD-4302-ABF3-3BBB42AEA642}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E00D8D4B-21AD-4302-ABF3-3BBB42AEA642}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E00D8D4B-21AD-4302-ABF3-3BBB42AEA642}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED4DA24D-0176-44A7-B0FB-F25FC212D2A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED4DA24D-0176-44A7-B0FB-F25FC212D2A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED4DA24D-0176-44A7-B0FB-F25FC212D2A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED4DA24D-0176-44A7-B0FB-F25FC212D2A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40C4156C-E932-439E-B8F1-B8C3BFED3BBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40C4156C-E932-439E-B8F1-B8C3BFED3BBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40C4156C-E932-439E-B8F1-B8C3BFED3BBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40C4156C-E932-439E-B8F1-B8C3BFED3BBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
