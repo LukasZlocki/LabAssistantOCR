@@ -4,7 +4,7 @@ using Tesseract;
 
 namespace LabAssistantOCR.EngineOCR
 {
-    internal class TextExtractor
+    public class TextExtractor
     {
         public string ExtractTextFromImg(Pix img)
         {
