@@ -1,0 +1,9 @@
+.vscode/
+.vs/
+LabAssistantOCR/obj/
+LabAssistantOCR/bin/
+
+LabAssistantOCR.EngineOCR/obj/
+LabAssistantOCR.EngineOCR/bin/
+
+
