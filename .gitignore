@@ -6,4 +6,5 @@ LabAssistantOCR/bin/
 LabAssistantOCR.EngineOCR/obj/
 LabAssistantOCR.EngineOCR/bin/
 
-
+LabAssistantOCR.Console/obj/
+LabAssistantOCR.Console/bin/
