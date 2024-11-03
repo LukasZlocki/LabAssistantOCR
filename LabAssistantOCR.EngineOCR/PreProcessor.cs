@@ -3,7 +3,7 @@ using ImageFormat = Tesseract.ImageFormat;
 
 namespace LabAssistant
 {
-    class PreProcessor
+    public class PreProcessor
     {
         public Pix ConvertImageToGrey(Pix img)
         {

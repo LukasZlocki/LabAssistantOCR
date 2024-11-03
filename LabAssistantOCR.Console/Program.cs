@@ -15,11 +15,6 @@ PreProcessor preProcessor = new PreProcessor();
 // Text extractor
 TextExtractor textExtractor = new TextExtractor();
 
-/*
-Console.WriteLine("**** Data extraction from not processed img");
-string extractedTextNotProcessedImg = textExtractor.ExtractTextFromImg(img);
-Console.WriteLine("Extracted Text: {0}", extractedTextNotProcessedImg);
-*/
 
 Console.WriteLine("**** Data extraction from processed to gray img");
 Pix imgGrey = preProcessor.ConvertImageToGrey(img);
