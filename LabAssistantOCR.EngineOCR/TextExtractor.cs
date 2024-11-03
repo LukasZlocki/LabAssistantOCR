@@ -2,7 +2,7 @@
 using Patagames.Ocr;
 using Tesseract;
 
-namespace LabAssistant
+namespace LabAssistantOCR.EngineOCR
 {
     internal class TextExtractor
     {

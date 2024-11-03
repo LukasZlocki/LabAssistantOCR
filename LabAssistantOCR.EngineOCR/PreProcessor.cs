@@ -1,7 +1,7 @@
 ﻿using Tesseract;
 using ImageFormat = Tesseract.ImageFormat;
 
-namespace LabAssistant
+namespace LabAssistantOCR.EngineOCR
 {
     public class PreProcessor
     {

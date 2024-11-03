@@ -1,4 +1,4 @@
-﻿using LabAssistant;
+﻿using LabAssistantOCR.EngineOCR;
 using Tesseract;
 
 Console.WriteLine("Laboratory Assistant");
