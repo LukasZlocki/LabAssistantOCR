@@ -4,14 +4,26 @@ namespace LabAssistantOCR.EngineOCR
 {
     public class ReportEngine
     {
+        PreProcessor preProcessor = new PreProcessor();
+
         public void ReadMachineReportImage(string pathToImage, string fileName)
         {
             // ToDo : Code loading img for further processing
-            var img = LoadImage(pathToImage, fileName);
+            Console.WriteLine("Loading image...");
+            Pix img = LoadImage(pathToImage, fileName);
+            Console.WriteLine("Image loaded.");
 
-            // ToDo : Code to pre process img
+            // ToDo : Code to pre process img (gray, binary)
+            Console.WriteLine("Preprocessing...");
+            Console.WriteLine("Preprocessing...8bit Gray");
+            Pix imgGray = preProcessor.ConvertImageToGrey(img);
+            Console.WriteLine("Preprocessing...binary image");
+            Pix imgBinary = preProcessor.ConvertImageToBinary(imgGray);
+            Console.WriteLine("Preprocessing finished.");
 
             // ToDo : Extract text from image
+            Console.WriteLine("Extracting raw text data...");
+
             // TODO : Clean data 
             // ToDo : Store data in final report
 
