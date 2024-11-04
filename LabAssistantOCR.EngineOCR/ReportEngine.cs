@@ -8,6 +8,7 @@ namespace LabAssistantOCR.EngineOCR
         DataExtractor dataExtractor = new DataExtractor();
         TextExtractor textExtractor = new TextExtractor();
 
+
         public void ReadMachineReportImage(string pathToImage, string fileName)
         {
             // ToDo : Code loading img for further processing
@@ -30,10 +31,18 @@ namespace LabAssistantOCR.EngineOCR
             string extractedTextGrayImg = textExtractor.ExtractTextFromImg(imgGray);
             Console.WriteLine("Extracting raw text from binary img...");
             string extractedTextBinaryImg = textExtractor.ExtractTextFromImg(imgBinary);
+            Console.WriteLine("Extracting raw text finished.");
 
+            // Todo : Data extraction from readed string
+            DataExtractor dataExtractor = new DataExtractor();
+            DataSample datasample1 = dataExtractor.DataExtractionToReport(extractedTextGrayImg);
+            DataSample datasample2 = dataExtractor.DataExtractionToReport(extractedTextBinaryImg);
+
+            // TODO : Clean data
+            Console.WriteLine("Cleaning data...");
+            DataCleaner cleaner = new DataCleaner();
             
 
-            // TODO : Clean data 
             // ToDo : Store data in final report
 
         }
