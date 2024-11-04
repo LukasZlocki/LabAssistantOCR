@@ -4,9 +4,18 @@ namespace LabAssistantOCR.EngineOCR
 {
     public class ReportEngine
     {
-        PreProcessor preProcessor = new PreProcessor();
-        DataExtractor dataExtractor = new DataExtractor();
-        TextExtractor textExtractor = new TextExtractor();
+        private readonly PreProcessor _preProcessor;
+        private readonly DataExtractor _dataExtractor;
+        private readonly TextExtractor _textExtractor;
+        private readonly DataCleaner _dataCleaner;
+
+        public ReportEngine()
+        {
+            _preProcessor = new();
+            _dataExtractor = new();
+            _textExtractor = new();
+            _textExtractor = new();
+        }
 
 
         public void ReadMachineReportImage(string pathToImage, string fileName)
@@ -20,30 +29,47 @@ namespace LabAssistantOCR.EngineOCR
             Console.WriteLine("Preprocessing...");
             Console.WriteLine("Preprocessing...8bit Gray");
             
-            Pix imgGray = preProcessor.ConvertImageToGrey(img);
+            Pix imgGray = _preProcessor.ConvertImageToGrey(img);
             Console.WriteLine("Preprocessing...binary image");
-            Pix imgBinary = preProcessor.ConvertImageToBinary(imgGray);
+            Pix imgBinary = _preProcessor.ConvertImageToBinary(imgGray);
             Console.WriteLine("Preprocessing finished.");
 
             // ToDo : Extract text from image
             Console.WriteLine("Extracting raw text data...");
             Console.WriteLine("Extracting raw text from gray img...");
-            string extractedTextGrayImg = textExtractor.ExtractTextFromImg(imgGray);
+            string extractedTextGrayImg = _textExtractor.ExtractTextFromImg(imgGray);
             Console.WriteLine("Extracting raw text from binary img...");
-            string extractedTextBinaryImg = textExtractor.ExtractTextFromImg(imgBinary);
+            string extractedTextBinaryImg = _textExtractor.ExtractTextFromImg(imgBinary);
             Console.WriteLine("Extracting raw text finished.");
 
             // Todo : Data extraction from readed string
-            DataExtractor dataExtractor = new DataExtractor();
-            DataSample datasample1 = dataExtractor.DataExtractionToReport(extractedTextGrayImg);
-            DataSample datasample2 = dataExtractor.DataExtractionToReport(extractedTextBinaryImg);
+            Console.WriteLine("Extracting report text data from raw text...");
+            Console.WriteLine("...extracting from Gray img...");
+            DataSample datasample1 = _dataExtractor.DataExtractionToReport(extractedTextGrayImg);
+            Console.WriteLine("...extracting from binary img...");
+            DataSample datasample2 = _dataExtractor.DataExtractionToReport(extractedTextBinaryImg);
+            Console.WriteLine("...extracting from binary img...");
+            Console.WriteLine("Extraction finisahed.");
+
+            Console.WriteLine("Showing data - gray img:");
+            datasample1.ShowDataSample();
+
+            Console.WriteLine("Showing data - binary img:");
+            datasample2.ShowDataSample();
+
 
             // TODO : Clean data
             Console.WriteLine("Cleaning data...");
-            DataCleaner cleaner = new DataCleaner();
-            
+            _dataCleaner.AddDatasample(datasample1);
+            _dataCleaner.AddDatasample(datasample2);
+            _dataCleaner.CleanDatasamples();
+            Console.WriteLine("Data cleaned.");
+
+            Console.WriteLine("Showing cleaned data:");
+            _dataCleaner.ShowCleanedDatasamples();
 
             // ToDo : Store data in final report
+
 
         }
 
