@@ -3,6 +3,12 @@ using Tesseract;
 
 Console.WriteLine("Laboratory Assistant");
 
+string imagePath = @"C:\VirtualServer\reuslts_meas\15 smarfone\";
+string fileName = "sample13.jpg";
+ReportEngine re = new();
+re.ReadMachineReportImage(imagePath, fileName);
+
+/*
 Console.WriteLine("");
 Console.WriteLine("**************** USING PREPROCESSING***************");
 
@@ -50,5 +56,8 @@ cleaner.AddDatasample(datasample1);
 cleaner.AddDatasample(datasample2);
 cleaner.CleanDatasamples();
 cleaner.ShowCleanedDatasamples();
+*/
+
+
 
 

@@ -2,8 +2,6 @@
 {
     public class DataExtractor
     {
-        DataSample dataSample = new DataSample();
-
         // List to establish point 0 for list of data
         List<string> zeroPointCheckList = new List<string> {
             "Sample",
@@ -16,9 +14,10 @@
         int dataSamplePosition3_6um = 4;
         int dataSamplePosition4_14um = 6;
 
-        public DataSample DataExtractionToReport(string reportString)
+        public DataSample DataExtractionToReport(string extractedString)
         {
-            string[] linesToAnalysys = CutStringToLines(reportString);
+            DataSample dataSample = new DataSample();
+            string[] linesToAnalysys = CutStringToLines(extractedString);
             int zeroPosition = 0;
             bool isZeroPositionEstablished = false;
             foreach (string line in linesToAnalysys)
