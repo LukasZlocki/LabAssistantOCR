@@ -19,7 +19,7 @@ namespace LabAssistantOCR.EngineOCR
             }
         }
 
-        public Pix CovertImageToGrayAndSaveImage(Pix img) 
+        public Pix ConvertImageToGrayAndSaveImage(Pix img) 
         {
             Pix convertedToGray = ConvertImageToGrey(img);
             // Save the grayscale image
@@ -40,7 +40,7 @@ namespace LabAssistantOCR.EngineOCR
             }
         }
 
-        public Pix CovertImageToBinaryAndSaveImage(Pix img)
+        public Pix ConvertImageToBinaryAndSaveImage(Pix img)
         {
             Pix convertedToBinary = ConvertImageToGrey(img);
             // Save the grayscale image
