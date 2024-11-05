@@ -14,11 +14,18 @@ namespace LabAssistantOCR.EngineOCR
                 {
                     // rotate mage 90 dagrees
                     Pix rotateGrayImg = grayImg.Rotate((float)1.5708);
-                    // Save the grayscale image
-                    rotateGrayImg.Save("C:\\VirtualServer\\reuslts_meas\\PreProcessed\\gray_image.jpg", ImageFormat.Bmp);
                     return rotateGrayImg;
                 }
             }
+        }
+
+        public Pix CovertImageToGrayAndSaveImage(Pix img) 
+        {
+            Pix convertedToGray = ConvertImageToGrey(img);
+            // Save the grayscale image
+            convertedToGray.Save("C:\\VirtualServer\\reuslts_meas\\PreProcessed\\gray_image.jpg", ImageFormat.Bmp);
+            return convertedToGray;
+
         }
 
         public Pix ConvertImageToBinary(Pix img)
@@ -28,11 +35,17 @@ namespace LabAssistantOCR.EngineOCR
                 // Convert to binary
                 using (var binaryImg = img.BinarizeOtsuAdaptiveThreshold(1000, 1000, 4000, 4000, (float)0.1))
                 {
-                    // Save the grayscale imageSystem.ArgumentException: 'The sx parameter must be greater than or equal to 16 (Parameter 'sx')'
-                    binaryImg.Save("C:\\VirtualServer\\reuslts_meas\\PreProcessed\\binary_image.jpg", ImageFormat.Bmp);
                     return binaryImg;
                 }
             }
+        }
+
+        public Pix CovertImageToBinaryAndSaveImage(Pix img)
+        {
+            Pix convertedToBinary = ConvertImageToGrey(img);
+            // Save the grayscale image
+            convertedToBinary.Save("C:\\VirtualServer\\reuslts_meas\\PreProcessed\\binary_image.jpg", ImageFormat.Bmp);
+            return convertedToBinary;
         }
 
     }
