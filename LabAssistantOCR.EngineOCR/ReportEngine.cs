@@ -16,7 +16,7 @@ namespace LabAssistantOCR.EngineOCR
             _textExtractor = new();
             _dataCleaner = new();
         }
-
+        // this is alternative method
         /// <summary>
         /// read and create report base on only binary image
         /// </summary>
