@@ -29,10 +29,12 @@ namespace LabAssistantOCR.EngineOCR
 
         public Pix ConvertImageToBinary(Pix img)
         {
+            Pix imgGray = ConvertImageToGrey(img);
+
             using (var engine = new TesseractEngine(@"./tessdata", "eng", EngineMode.Default))
             {
                 // Convert to binary
-                using (var binaryImg = img.BinarizeOtsuAdaptiveThreshold(1000, 1000, 4000, 4000, (float)0.1))
+                using (var binaryImg = imgGray.BinarizeOtsuAdaptiveThreshold(1000, 1000, 4000, 4000, (float)0.1))
                 {
                     return binaryImg;
                 }
@@ -43,9 +45,11 @@ namespace LabAssistantOCR.EngineOCR
         {
             Pix convertedToBinary = ConvertImageToBinary(img);
             // Save the grayscale image
-            convertedToBinary.Save("C:\\VirtualServer\\reuslts_meas\\PreProcessed\\binary_image.jpg", ImageFormat.Jp2);
+            string savePath = @"C:\VirtualServer\reuslts_meas\PreProcessed\binary_image.jpg";
+            convertedToBinary.Save(savePath, ImageFormat.Jp2);
             return convertedToBinary;
         }
+
 
 
 

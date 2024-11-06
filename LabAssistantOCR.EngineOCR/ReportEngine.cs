@@ -16,7 +16,46 @@ namespace LabAssistantOCR.EngineOCR
             _textExtractor = new();
             _dataCleaner = new();
         }
-        // this is alternative method
+
+        public void ReadMachineReportImage_GrayOnly(string pathToImage, string fileName)
+        {
+            // Loading img for further processing
+            Console.WriteLine("Loading image...");
+            Pix img = LoadImage(pathToImage, fileName);
+            Console.WriteLine("Image loaded.");
+
+            // Pre processing img - binary only
+            Console.WriteLine("Preprocessing...");
+            Console.WriteLine("Preprocessing...8bit Gray");
+            Pix imgGray = _preProcessor.ConvertImageToGrayAndSaveImage(img);
+
+            // Extract text from image
+            Console.WriteLine("Extracting raw text data...");
+            Console.WriteLine("Extracting raw text from gray img...");
+            string extractedTextGrayImg = _textExtractor.ExtractTextFromImg(imgGray);
+            Console.WriteLine("Extracted Text: {0}", extractedTextGrayImg);
+            Console.WriteLine("Extracting raw text finished.");
+
+            // Data extraction from readed string
+            Console.WriteLine("Extracting report text data from raw text...");
+            Console.WriteLine("...extracting from Gray img...");
+            DataSample datasampleGray = _dataExtractor.DataExtractionToReport(extractedTextGrayImg);
+            Console.WriteLine("Extraction finisahed.");
+
+            Console.WriteLine("Showing data - gray img:");
+            datasampleGray.ShowDataSample();
+
+            // Clean data
+            Console.WriteLine("Cleaning data...");
+            _dataCleaner.AddDatasample(datasampleGray);
+            _dataCleaner.CleanDatasamples();
+            Console.WriteLine("Data cleaned.");
+
+            Console.WriteLine("Showing cleaned data:");
+            _dataCleaner.ShowCleanedDatasamples();
+        }
+
+
         /// <summary>
         /// read and create report base on only binary image
         /// </summary>
@@ -24,13 +63,22 @@ namespace LabAssistantOCR.EngineOCR
         /// <param name="fileName"></param>
         public void ReadMachineReportImage_BinaryOnly(string pathToImage, string fileName)
         {
-            /*
             // Loading img for further processing
             Console.WriteLine("Loading image...");
             Pix img = LoadImage(pathToImage, fileName);
             Console.WriteLine("Image loaded.");
-            */
 
+            // Pre processing img - binary only
+            Console.WriteLine("Preprocessing...");
+            Console.WriteLine("Preprocessing...binary image");
+            Pix imgBinary = _preProcessor.ConvertImageToBinary(img);
+            Console.WriteLine("Preprocessing finished.");
+
+            // Extract text from image
+            Console.WriteLine("Extracting raw text data...");
+            Console.WriteLine("Extracting raw text from binary img...");
+            string extractedTextBinaryImg = _textExtractor.ExtractTextFromImg(imgBinary);
+            Console.WriteLine("Extracted Text: {0}", extractedTextBinaryImg);
         }
 
 
