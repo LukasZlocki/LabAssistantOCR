@@ -1,5 +1,4 @@
 ﻿using Tesseract;
-using ImageFormat = Tesseract.ImageFormat;
 
 namespace LabAssistantOCR.EngineOCR
 {
@@ -10,7 +9,7 @@ namespace LabAssistantOCR.EngineOCR
             using (var engine = new TesseractEngine(@"./tessdata", "eng", EngineMode.Default))
             {
                 // Convert to grayscale
-                using (var grayImg = img.ConvertRGBToGray(1, 1, 1))
+                using (var grayImg = img.ConvertRGBToGray(0.8f, 0.8f, 0.8f))
                 {
                     // rotate mage 90 dagrees
                     Pix rotateGrayImg = grayImg.Rotate((float)1.5708);
@@ -19,11 +18,11 @@ namespace LabAssistantOCR.EngineOCR
             }
         }
 
-        public Pix ConvertImageToGrayAndSaveImage(Pix img) 
+        public Pix ConvertImageToGrayAndSaveImage(Pix img)
         {
             Pix convertedToGray = ConvertImageToGrey(img);
             // Save the grayscale image
-            convertedToGray.Save("C:\\VirtualServer\\reuslts_meas\\PreProcessed\\gray_image.jpg", ImageFormat.Bmp);
+            convertedToGray.Save("C:\\VirtualServer\\reuslts_meas\\PreProcessed\\gray_image.png", ImageFormat.Png);
             return convertedToGray;
 
         }
@@ -42,11 +41,14 @@ namespace LabAssistantOCR.EngineOCR
 
         public Pix ConvertImageToBinaryAndSaveImage(Pix img)
         {
-            Pix convertedToBinary = ConvertImageToGrey(img);
+            Pix convertedToBinary = ConvertImageToBinary(img);
             // Save the grayscale image
-            convertedToBinary.Save("C:\\VirtualServer\\reuslts_meas\\PreProcessed\\binary_image.jpg", ImageFormat.Bmp);
+            convertedToBinary.Save("C:\\VirtualServer\\reuslts_meas\\PreProcessed\\binary_image.jpg", ImageFormat.Jp2);
             return convertedToBinary;
         }
+
+
+
 
     }
 }

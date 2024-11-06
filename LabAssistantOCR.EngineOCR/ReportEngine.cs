@@ -17,7 +17,28 @@ namespace LabAssistantOCR.EngineOCR
             _dataCleaner = new();
         }
 
+        /// <summary>
+        /// read and create report base on only binary image
+        /// </summary>
+        /// <param name="pathToImage"></param>
+        /// <param name="fileName"></param>
+        public void ReadMachineReportImage_BinaryOnly(string pathToImage, string fileName)
+        {
+            /*
+            // Loading img for further processing
+            Console.WriteLine("Loading image...");
+            Pix img = LoadImage(pathToImage, fileName);
+            Console.WriteLine("Image loaded.");
+            */
 
+        }
+
+
+        /// <summary>
+        /// Read and create report base on gray and binary images
+        /// </summary>
+        /// <param name="pathToImage"></param>
+        /// <param name="fileName"></param>
         public void ReadMachineReportImage(string pathToImage, string fileName)
         {
             // Loading img for further processing
@@ -28,20 +49,23 @@ namespace LabAssistantOCR.EngineOCR
             // Pre processing img (gray, binary)
             Console.WriteLine("Preprocessing...");
             Console.WriteLine("Preprocessing...8bit Gray");
-            
-            Pix imgGray = _preProcessor.ConvertImageToGrey(img);
+            Pix imgGray = LoadImage(@"C:\VirtualServer\reuslts_meas\PreProcessed\", "gray_image.png");
+            //Pix imgGray = _preProcessor.ConvertImageToGrayAndSaveImage(img);
+
             Console.WriteLine("Preprocessing...binary image");
-            Pix imgBinary = _preProcessor.ConvertImageToBinary(imgGray);
+            Pix imgBinary = _preProcessor.ConvertImageToBinaryAndSaveImage(imgGray);
             Console.WriteLine("Preprocessing finished.");
 
             // Extract text from image
             Console.WriteLine("Extracting raw text data...");
             Console.WriteLine("Extracting raw text from gray img...");
-            string extractedTextGrayImg = _textExtractor.ExtractTextFromImg(imgGray);
+            Pix imgGrayTxtExtract = LoadImage(@"C:\VirtualServer\reuslts_meas\PreProcessed\", "gray_image.png");
+            string extractedTextGrayImg = _textExtractor.ExtractTextFromImg(imgGrayTxtExtract);
+            
             Console.WriteLine("Extracting raw text from binary img...");
             string imagePathBin = @"C:\VirtualServer\reuslts_meas\PreProcessed\binary_image.jpg";
-            Pix imgBin = Pix.LoadFromFile(imagePathBin);
-            string extractedTextBinaryImg = _textExtractor.ExtractTextFromImg(imgBin);
+            Pix imgBinaryTxtExtract = LoadImage(@"C:\VirtualServer\reuslts_meas\PreProcessed\", "binary_image.png");
+            string extractedTextBinaryImg = _textExtractor.ExtractTextFromImg(imgBinaryTxtExtract);
 
             //string extractedTextBinaryImg = _textExtractor.ExtractTextFromImg(imgBinary);
             Console.WriteLine("Extracting raw text finished.");
