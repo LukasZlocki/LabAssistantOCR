@@ -1,15 +1,31 @@
 ﻿using LabAssistantOCR.EngineOCR;
 using Tesseract;
 
+string imagePath = @"C:\VirtualServer\reuslts_meas\15 smarfone\";
+string fileName = "sample2.jpg";
+
 Console.WriteLine("Laboratory Assistant");
 
-#region Class integration
-///*
+#region Report base on GRAY img only
+ReportEngine reGray = new();
+reGray.ReadMachineReportImage_GrayOnly(imagePath, fileName);
+#endregion
+
+
+#region Report base on BINARY img only
+/*
+ReportEngine reBinary = new();
+reBinary.ReadMachineReportImage_BinaryOnly(imagePath, fileName);
+*/
+#endregion
+
+#region Report base on gray and binary img
+/*
 string imagePath = @"C:\VirtualServer\reuslts_meas\15 smarfone\";
 string fileName = "sample13.jpg";
 ReportEngine re = new();
 re.ReadMachineReportImage(imagePath, fileName);
-//*/
+*/
 #endregion
 
 #region Main Program
