@@ -77,7 +77,8 @@ namespace LabAssistantOCR.EngineOCR
             // Extract text from image
             Console.WriteLine("Extracting raw text data...");
             Console.WriteLine("Extracting raw text from binary img...");
-            string extractedTextBinaryImg = _textExtractor.ExtractTextFromImg(imgBinary);
+            //string extractedTextBinaryImg = _textExtractor.ExtractTextFromImg(imgBinary);
+            string extractedTextBinaryImg = _textExtractor.ExtrA
             Console.WriteLine("Extracted Text: {0}", extractedTextBinaryImg);
         }
 

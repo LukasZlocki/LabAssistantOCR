@@ -17,7 +17,7 @@ namespace LabAssistantOCR.EngineOCR
             }
         }
 
-        public static string ExtractTextFromImage(string imagePath)
+        public string ExtractTextFromLoadedImage(string imagePath)
         {
             using (var engine = new TesseractEngine(@"./tessdata", "eng", EngineMode.Default))
             {
