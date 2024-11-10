@@ -1,4 +1,4 @@
-# OrderFlowStudio App
+# LabAssistant App
 
 App to help laboratory specialists in their daily work.
 
@@ -36,8 +36,8 @@ Stage 3:
 
 * C#, 
 * .NET 8.0, 
+* tesseract library for OCR
 * WPF for desktop app
-* tesseract library for OCR 
 * MAUI for smartphone app
 
 
