@@ -5,8 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LabAssistantOCR"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="LabAssistants" Height="700" Width="500">
 
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="80" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="2" AllowDrop="True" Background="Gray" Drop="FileDropStackPanel_Drop">
+            <Label Content="... Drop image here ! ..."  />
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <TextBlock x:Name="txtScreen" Background="Black" Foreground="White" FontStyle="Normal" FontSize="18" TextWrapping="Wrap" >
+                ... data will be present here
+            </TextBlock>
+        </ScrollViewer>
     </Grid>
+
 </Window>
