@@ -30,8 +30,15 @@ namespace LabAssistantOCR
 
         private void Show(string path)
         {
+            // Gettting raw data from image without preprocessing
             string rawdata = GetRawDataFromImage(path);
             ShowDataOnScreen(rawdata);
+
+            // Get report from image without preprocessing
+            DataSample dataSample = new DataSample();
+            dataSample = GetDatasampleFromImage(path);
+            ShowReportOnScreen(dataSample);
+
         }
 
         private string GetRawDataFromImage(string path)
@@ -39,10 +46,24 @@ namespace LabAssistantOCR
             return _reportEngine.GetTextFromImage_NoPreprocessing(path);
         }
 
+        private DataSample GetDatasampleFromImage(string path)
+        { 
+            return _reportEngine.GetReportFromImage_NoPreProcessing(path);
+        }
+
         private void ShowDataOnScreen(string data)
         {
             txtScreen.Text = string.Empty;
             txtScreen.Text = data;
+        }
+
+        private void ShowReportOnScreen(DataSample dataSample)
+        {
+            string report = "Report date: " + dataSample.Date + "\n"
+                + " 4um  : " + dataSample.um4 + "\n"
+                + " 6um  : " + dataSample.um6 + "\n"
+                + " 14um : " + dataSample.um14;
+            txtReportScreen.Text = report;
         }
 
     }

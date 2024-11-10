@@ -10,11 +10,15 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="80"/>
             <RowDefinition Height="*" />
             <RowDefinition Height="80" />
         </Grid.RowDefinitions>
 
+        <TextBlock x:Name="txtReportScreen" Background="DarkGray">
+            ... report will be shown here ...
+        </TextBlock>
+        
         <StackPanel Grid.Row="2" AllowDrop="True" Background="Gray" Drop="FileDropStackPanel_Drop">
             <Label Content="... Drop image here ! ..."  />
         </StackPanel>
