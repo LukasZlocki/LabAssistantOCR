@@ -5,14 +5,16 @@ namespace LabAssistantOCR.EngineOCR
     public class DataCleaner
     {
         private List<DataSample> RawDataSamples;
-
         private List<DataSample> CleanedDatasamples;
+
+        DataSample cleanReport;
 
         // Constructor
         public DataCleaner()
         {
             RawDataSamples = new List<DataSample>();
             CleanedDatasamples = new List<DataSample>();
+            cleanReport = new DataSample();
         }
 
         /// <summary>
@@ -106,6 +108,12 @@ namespace LabAssistantOCR.EngineOCR
                 Console.WriteLine("Cleaned datasample report:");
                 dataSample.ShowDataSample();
             }
+        }
+
+        public DataSample GetCleanedReport()
+        {
+            this.cleanReport = CleanedDatasamples.First();
+            return this.cleanReport;
         }
 
     }
