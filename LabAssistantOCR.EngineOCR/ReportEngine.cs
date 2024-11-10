@@ -27,9 +27,17 @@ namespace LabAssistantOCR.EngineOCR
             return  _textExtractor.ExtractTextFromLoadedImage(pathToImage);
         }
 
+
         public DataSample GetReportFromImage_NoPreProcessing(string pathToImage)
         {
-
+            string extractedText = _textExtractor.ExtractTextFromLoadedImage(pathToImage);
+            DataSample rawExtractedDataSample = new DataSample();
+            rawExtractedDataSample = _dataExtractor.DataExtractionToReport(extractedText);
+            // Add datasample set to data cleaner
+            _dataCleaner.AddDatasample(rawExtractedDataSample);
+            // Cleaning data samples
+            _dataCleaner.CleanDatasamples();
+            return _dataCleaner.GetCleanedReport();
         }
 
         public void ReadMachineReportImage_GrayOnly(string pathToImage, string fileName)
