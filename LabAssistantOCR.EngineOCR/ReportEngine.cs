@@ -27,7 +27,11 @@ namespace LabAssistantOCR.EngineOCR
             return  _textExtractor.ExtractTextFromLoadedImage(pathToImage);
         }
 
-
+        /// <summary>
+        /// Retrieve report from given image without image pre processingS
+        /// </summary>
+        /// <param name="pathToImage">Path to image</param>
+        /// <returns>DataSample object with cleaned report data</returns>
         public DataSample GetReportFromImage_NoPreProcessing(string pathToImage)
         {
             string extractedText = _textExtractor.ExtractTextFromLoadedImage(pathToImage);
@@ -101,8 +105,8 @@ namespace LabAssistantOCR.EngineOCR
             Console.WriteLine("Extracting raw text data...");
             Console.WriteLine("Extracting raw text from binary img...");
             //string extractedTextBinaryImg = _textExtractor.ExtractTextFromImg(imgBinary);
-            string extractedTextBinaryImg = _textExtractor.ExtrA
-            Console.WriteLine("Extracted Text: {0}", extractedTextBinaryImg);
+            /// --- >>>>   string extractedTextBinaryImg = _textExtractor.ExtrA
+            ///Console.WriteLine("Extracted Text: {0}", extractedTextBinaryImg);
         }
 
 
