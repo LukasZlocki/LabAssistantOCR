@@ -21,7 +21,7 @@
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <TextBlock x:Name="txtScreen" Background="Black" Foreground="White" FontStyle="Normal" FontSize="18" TextWrapping="Wrap" >
-                ... data will be present here
+                -- Data will be present here --
             </TextBlock>
         </ScrollViewer>
     </Grid>

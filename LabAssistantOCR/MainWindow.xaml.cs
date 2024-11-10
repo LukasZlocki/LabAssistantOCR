@@ -28,7 +28,7 @@ namespace LabAssistantOCR
             }
         }
 
-        public void Show(string path)
+        private void Show(string path)
         {
             string rawdata = GetRawDataFromImage(path);
             ShowDataOnScreen(rawdata);
@@ -41,9 +41,9 @@ namespace LabAssistantOCR
 
         private void ShowDataOnScreen(string data)
         {
+            txtScreen.Text = string.Empty;
             txtScreen.Text = data;
         }
-
 
     }
 }
