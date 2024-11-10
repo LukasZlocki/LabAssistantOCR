@@ -17,6 +17,21 @@ namespace LabAssistantOCR.EngineOCR
             _dataCleaner = new();
         }
 
+        /// <summary>
+        /// Extract report from given image without any pre processing.
+        /// </summary>
+        /// <param name="pathToImage">Path to image</param>
+        /// <returns>Extracted string from given image</returns>
+        public string GetTextFromImage_NoPreprocessing(string pathToImage)
+        {
+            return  _textExtractor.ExtractTextFromLoadedImage(pathToImage);
+        }
+
+        public DataSample GetReportFromImage_NoPreProcessing(string pathToImage)
+        {
+
+        }
+
         public void ReadMachineReportImage_GrayOnly(string pathToImage, string fileName)
         {
             // Loading img for further processing
