@@ -17,6 +17,33 @@ namespace LabAssistantOCR.EngineOCR
             _dataCleaner = new();
         }
 
+        /// <summary>
+        /// Extract report from given image without any pre processing.
+        /// </summary>
+        /// <param name="pathToImage">Path to image</param>
+        /// <returns>Extracted string from given image</returns>
+        public string GetTextFromImage_NoPreprocessing(string pathToImage)
+        {
+            return  _textExtractor.ExtractTextFromLoadedImage(pathToImage);
+        }
+
+        /// <summary>
+        /// Retrieve report from given image without image pre processingS
+        /// </summary>
+        /// <param name="pathToImage">Path to image</param>
+        /// <returns>DataSample object with cleaned report data</returns>
+        public DataSample GetReportFromImage_NoPreProcessing(string pathToImage)
+        {
+            string extractedText = _textExtractor.ExtractTextFromLoadedImage(pathToImage);
+            DataSample rawExtractedDataSample = new DataSample();
+            rawExtractedDataSample = _dataExtractor.DataExtractionToReport(extractedText);
+            // Add datasample set to data cleaner
+            _dataCleaner.AddDatasample(rawExtractedDataSample);
+            // Cleaning data samples
+            _dataCleaner.CleanDatasamples();
+            return _dataCleaner.GetCleanedReport();
+        }
+
         public void ReadMachineReportImage_GrayOnly(string pathToImage, string fileName)
         {
             // Loading img for further processing
@@ -77,8 +104,9 @@ namespace LabAssistantOCR.EngineOCR
             // Extract text from image
             Console.WriteLine("Extracting raw text data...");
             Console.WriteLine("Extracting raw text from binary img...");
-            string extractedTextBinaryImg = _textExtractor.ExtractTextFromImg(imgBinary);
-            Console.WriteLine("Extracted Text: {0}", extractedTextBinaryImg);
+            //string extractedTextBinaryImg = _textExtractor.ExtractTextFromImg(imgBinary);
+            /// --- >>>>   string extractedTextBinaryImg = _textExtractor.ExtrA
+            ///Console.WriteLine("Extracted Text: {0}", extractedTextBinaryImg);
         }
 
 

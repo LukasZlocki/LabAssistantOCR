@@ -2,21 +2,23 @@
 using Tesseract;
 
 string imagePath = @"C:\VirtualServer\reuslts_meas\15 smarfone\";
-string fileName = "sample2.jpg";
+string fileName = "sample_00.jpg";
 
 Console.WriteLine("Laboratory Assistant");
 
+/*
+// This works!
 #region Report base on GRAY img only
 ReportEngine reGray = new();
 reGray.ReadMachineReportImage_GrayOnly(imagePath, fileName);
 #endregion
-
+*/
 
 #region Report base on BINARY img only
-/*
+
 ReportEngine reBinary = new();
 reBinary.ReadMachineReportImage_BinaryOnly(imagePath, fileName);
-*/
+
 #endregion
 
 #region Report base on gray and binary img

@@ -14,6 +14,11 @@
         int dataSamplePosition3_6um = 4;
         int dataSamplePosition4_14um = 6;
 
+        /// <summary>
+        /// Extract data to report object from given raw string of data
+        /// </summary>
+        /// <param name="extractedString">Extracted raw string from image</param>
+        /// <returns>DataSample object with extracted report data</returns>
         public DataSample DataExtractionToReport(string extractedString)
         {
             DataSample dataSample = new DataSample();
