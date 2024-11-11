@@ -2,7 +2,7 @@
 
 namespace LabAssistantOCR.EngineOCR
 {
-    public class DataCleaner
+    internal class DataCleaner
     {
         private List<DataSample> RawDataSamples;
         private List<DataSample> CleanedDatasamples;

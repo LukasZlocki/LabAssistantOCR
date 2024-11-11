@@ -1,6 +1,6 @@
 ﻿namespace LabAssistantOCR.EngineOCR
 {
-    public class DataExtractor
+    internal class DataExtractor
     {
         // List to establish point 0 for list of data
         List<string> zeroPointCheckList = new List<string> {
