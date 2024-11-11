@@ -4,7 +4,7 @@ using Tesseract;
 
 namespace LabAssistantOCR.EngineOCR
 {
-    public class TextExtractor
+    internal class TextExtractor
     {
         public string ExtractTextFromImg(Pix img)
         {
@@ -17,21 +17,28 @@ namespace LabAssistantOCR.EngineOCR
             }
         }
 
-        public string ExtractTextFromLoadedImage(string imagePath)
+        internal string ExtractTextFromLoadedImage(string imagePath)
         {
             using (var engine = new TesseractEngine(@"./tessdata", "eng", EngineMode.Default))
             {
-                using (var img = Pix.LoadFromFile(imagePath))
+                try
                 {
-                    using (var page = engine.Process(img))
+                    using (var img = Pix.LoadFromFile(imagePath))
                     {
-                        return page.GetText();
+                        using (var page = engine.Process(img))
+                        {
+                            return page.GetText();
+                        }
                     }
+                }
+                catch (Exception ex) 
+                {
+                    return "Error during image text recognition. System error description: " + ex.Message;
                 }
             }
         }
 
-        public void CreatePdf()
+        internal void CreatePdf()
         {
             using (var api = OcrApi.Create())
             {
