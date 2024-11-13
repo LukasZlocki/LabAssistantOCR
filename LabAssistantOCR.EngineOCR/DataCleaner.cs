@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Reflection.Metadata;
+using System.Text.RegularExpressions;
 
 namespace LabAssistantOCR.EngineOCR
 {
@@ -41,15 +42,22 @@ namespace LabAssistantOCR.EngineOCR
         /// <returns>date as string</returns>
         private string extractDate(string dateString)
         {
-            string date;
-            string pattern = @"\d{4}-\d{2}-\d{2}";
-            Match match = Regex.Match(dateString, pattern);
-
-            if (match.Success)
+            if (dateString != null)
             {
-                return match.Value;
+                string date;
+                string pattern = @"\d{4}-\d{2}-\d{2}";
+                Match match = Regex.Match(dateString, pattern);
+
+                if (match.Success)
+                {
+                    return match.Value;
+                }
+                else
+                {
+                    return "0000-00-00";
+                }
             }
-            else
+            else 
             {
                 return "0000-00-00";
             }

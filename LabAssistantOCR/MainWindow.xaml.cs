@@ -8,7 +8,7 @@ namespace LabAssistantOCR
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ReportEngine _reportEngine = new ReportEngine();
+        private ReportEngine _reportEngine;
 
         public MainWindow()
         {
@@ -43,6 +43,7 @@ namespace LabAssistantOCR
 
         private string GetRawDataFromImage(string path)
         {
+            _reportEngine = new();
             return _reportEngine.GetTextFromImage_NoPreprocessing(path);
         }
 
@@ -59,6 +60,7 @@ namespace LabAssistantOCR
 
         private void ShowReportOnScreen(DataSample dataSample)
         {
+            txtReportScreen.Text = string.Empty;
             string report = "Report date: " + dataSample.Date + "\n"
                 + " 4um  : " + dataSample.um4 + "\n"
                 + " 6um  : " + dataSample.um6 + "\n"
