@@ -70,17 +70,25 @@ namespace LabAssistantOCR.EngineOCR
         /// <returns>value as string</returns>
         private string extractValue(string value)
         {
-            string pattern = @"\b\d+\b";
-            Match match = Regex.Match(value, pattern);
-
-            if (match.Success)
+            if (value != null)
             {
-                return match.Value;
+                string pattern = @"\b\d+\b";
+                Match match = Regex.Match(value, pattern);
+
+                if (match.Success)
+                {
+                    return match.Value;
+                }
+                else
+                {
+                    return "N/A";
+                }
             }
             else
             {
                 return "N/A";
             }
+
         }
 
         /// <summary>
