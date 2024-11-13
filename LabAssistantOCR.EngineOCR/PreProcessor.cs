@@ -2,7 +2,7 @@
 
 namespace LabAssistantOCR.EngineOCR
 {
-    public class PreProcessor
+    internal class PreProcessor
     {
         public Pix ConvertImageToGrey(Pix img)
         {

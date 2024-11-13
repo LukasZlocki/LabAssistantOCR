@@ -34,7 +34,31 @@ namespace LabAssistantOCR.EngineOCR
         /// <returns>DataSample object with cleaned report data</returns>
         public DataSample GetReportFromImage_NoPreProcessing(string pathToImage)
         {
-            string extractedText = _textExtractor.ExtractTextFromLoadedImage(pathToImage);
+            string extractedText = "";
+            try 
+            { 
+                extractedText = _textExtractor.ExtractTextFromLoadedImage(pathToImage);
+            }
+            catch (ErrorHandler ex)
+            {
+                new DataSample
+                {
+                    Date = Convert.ToString(DateTime.UtcNow),
+                    um4 = "N/A",
+                    um6 = "N/A",
+                    um14 = "N/A"
+                };
+            }
+            catch (Exception ex)
+            {
+                new DataSample 
+                { 
+                    Date = Convert.ToString(DateTime.UtcNow),
+                    um4 = "N/A",
+                    um6 = "N/A",
+                    um14 = "N/A"
+                };
+            }
             DataSample rawExtractedDataSample = new DataSample();
             rawExtractedDataSample = _dataExtractor.DataExtractionToReport(extractedText);
             // Add datasample set to data cleaner
