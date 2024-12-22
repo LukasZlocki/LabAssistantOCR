@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LabAssistantOCR.ImgTestUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="LabAssistants - pure OCR testing no image processing support" Height="700" Width="500">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="80" />
+        </Grid.RowDefinitions>
 
+        <TextBlock x:Name="txtReportScreen" Grid.Row="0" Background="DarkGray">
+            ... report will be shown here ...
+        </TextBlock>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <TextBlock x:Name="txtScreen" Background="Black" Foreground="White" FontStyle="Normal" FontSize="18" TextWrapping="Wrap" >
+             -- Data will be present here --
+            </TextBlock>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="2" AllowDrop="True" Background="Gray" Drop="FileDropStackPanel_Drop">
+            <Label Content="... Drop image here ! ..."  />
+        </StackPanel>
     </Grid>
 </Window>
