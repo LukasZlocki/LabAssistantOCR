@@ -68,6 +68,18 @@ namespace LabAssistantOCR.EngineOCR
             return _dataCleaner.GetCleanedReport();
         }
 
+        public DataSample GetReportFromImage_ImageWillBePreProcessed(string pathToImage)
+        {
+
+            // Step 0: Load image from given path
+            // Step 1: Rescale the image
+            // Step 2: Convert image to gray
+            // Step 3: Convert gray image to binary image
+            // Step 4: Extract text data from preprocessed image
+            // Step 5: Clean data
+            // Step 6: Return report
+        }
+
         public void ReadMachineReportImage_GrayOnly(string pathToImage, string fileName)
         {
             // Loading img for further processing
