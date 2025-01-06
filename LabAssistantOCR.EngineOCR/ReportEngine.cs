@@ -11,12 +11,23 @@ namespace LabAssistantOCR.EngineOCR
         private readonly TextExtractor _textExtractor;
         private readonly DataCleaner _dataCleaner;
 
+        private string _extractedText = "";
+
         public ReportEngine()
         {
             _preProcessor = new();
             _dataExtractor = new();
             _textExtractor = new();
             _dataCleaner = new();
+        }
+
+        /// <summary>
+        /// Get extracted string during image processing and data extraction
+        /// </summary>
+        /// <returns>String with extracted data</returns>
+        public string GetExtractedStringFromPreProcessedImage()
+        {
+            return _extractedText;
         }
 
         /// <summary>
@@ -102,6 +113,7 @@ namespace LabAssistantOCR.EngineOCR
             try
             {
                 extractedText = _textExtractor.ExtractTextFromLoadedImage("C:\\VirtualServer\\reuslts_meas\\PreProcessedTesseract\\4rescaledBinaryImg.jpg");
+                _extractedText = extractedText;
             }
             catch (ErrorHandler ex)
             {
