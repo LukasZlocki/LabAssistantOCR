@@ -24,61 +24,45 @@ namespace LabAssistantOCR
                 string path = System.IO.Path.GetFullPath(files[0]);
                 string path2 = System.IO.Path.GetDirectoryName(files[0]);
 
-                Show(path);
+                ExtractReportAndShowOnScreen(path);
             }
         }
 
-        private void Show(string path)
+        private void ExtractReportAndShowOnScreen(string path)
         {
-            _reportEngine = new();
-            _reportEngine.GetReportFromImage_ImageWillBePreProcessed(path);
+            DataSample dataSample = new DataSample();
 
-            /*
-            // Gettting raw data from image without preprocessing
-            string rawdata = GetRawDataFromImage(path);
+            // Get report from preprocessed image
+            _reportEngine = new();
+            dataSample = _reportEngine.GetReportFromImage_ImageWillBePreProcessed(path);
+
+            // Gettting raw data from pre processed image.
+            string rawdata = _reportEngine.GetExtractedStringFromPreProcessedImage();
+            
+            // Show raw data on screen
             ShowDataOnScreen(rawdata);
 
-            // Get report from image without preprocessing
-            DataSample dataSample = new DataSample();
-            dataSample = GetDatasampleFromImage(path);
+            // Show extracted report on screen
             ShowReportOnScreen(dataSample);
-            */
-        }
-
-        private DataSample GetDataFromPrepocessedimage(string path)
-        {
-            _reportEngine = new();
-            return _reportEngine.GetReportFromImage_ImageWillBePreProcessed(path);
-        }
-
-        // This method is absolete here ! 
-        private string GetRawDataFromImage(string path)
-        {
-            _reportEngine = new();
-            return _reportEngine.GetTextFromImage_NoPreprocessing(path);
-        }
-
-        // This method is absolete here ! 
-        private DataSample GetDatasampleFromImage(string path)
-        { 
-            return _reportEngine.GetReportFromImage_NoPreProcessing(path);
         }
 
         private void ShowDataOnScreen(string data)
         {
             txtScreen.Text = string.Empty;
-            txtScreen.Text = data;
+            txtScreen.Text = "   " + data;
         }
 
         private void ShowReportOnScreen(DataSample dataSample)
         {
             txtReportScreen.Text = string.Empty;
-            string report = "Report date: " + dataSample.Date + "\n"
+            string report = "FINAL REPORT: " + "\n"
+                + "Report date: " + dataSample.Date + "\n"
                 + " 4um  : " + dataSample.um4 + "\n"
                 + " 6um  : " + dataSample.um6 + "\n"
                 + " 14um : " + dataSample.um14;
             txtReportScreen.Text = report;
         }
+
 
     }
 }
