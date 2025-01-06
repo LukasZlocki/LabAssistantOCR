@@ -47,7 +47,6 @@ namespace LabAssistantOCR.ImgTestUI
             DataSample dataSample = new DataSample();
             dataSample = GetDatasampleFromImage(path);
             ShowReportOnScreen(dataSample);
-
         }
 
         private string GetRawDataFromImage(string path)
