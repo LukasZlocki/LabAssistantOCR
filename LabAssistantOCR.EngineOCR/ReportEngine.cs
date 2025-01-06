@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Xml.Linq;
 using Tesseract;
 
 namespace LabAssistantOCR.EngineOCR
@@ -69,20 +70,34 @@ namespace LabAssistantOCR.EngineOCR
             return _dataCleaner.GetCleanedReport();
         }
 
+
         public DataSample GetReportFromImage_ImageWillBePreProcessed(string path)
-        {
-
-            // Step 0: Load image from given path
-            Image img = _preProcessor.LoadJpgImage(path);
-
+        {       
+            /*
             // Step 1: Rescale the image
             Image imgRescaled = _preProcessor.RescaleJpgImage(img, 1000);
             _preProcessor.SaveJpgImage(imgRescaled, "C:\\VirtualServer\\reuslts_meas\\PreProcessedTesseract\\1rescaledImg.jpg");
+            */
 
+            // Step 1: Load and convert orginal image to gray
+            Pix imageToGray = LoadImage(path);
+            Pix grayImg = _preProcessor.ConvertImageToGrey(imageToGray);
+            grayImg.Save("C:\\VirtualServer\\reuslts_meas\\PreProcessedTesseract\\1grayImage.tif", ImageFormat.Tiff);
 
-            // Step 2: Convert image to gray
+            // Step 2: Convert gray image to binary image
+            Pix binaryImg = _preProcessor.ConvertImageToBinary(grayImg);
+            binaryImg.Save("C:\\VirtualServer\\reuslts_meas\\PreProcessedTesseract\\2binaryImage.tif", ImageFormat.Tiff);
 
-            // Step 3: Convert gray image to binary image
+            // Rescale grey image
+            Image grayImgToRescale = _preProcessor.LoadJpgImage("C:\\VirtualServer\\reuslts_meas\\PreProcessedTesseract\\1grayImage.tif");
+            Image rescaledGrayImg = _preProcessor.RescaleJpgImage(grayImgToRescale, 1000);
+            _preProcessor.SaveJpgImage(rescaledGrayImg, "C:\\VirtualServer\\reuslts_meas\\PreProcessedTesseract\\3rescaledGrayImg.jpg");
+
+            // Rescale grey binary image
+            Image binaryImgToRescale = _preProcessor.LoadJpgImage("C:\\VirtualServer\\reuslts_meas\\PreProcessedTesseract\\2binaryImage.tif");
+            Image rescaledBinaryImg = _preProcessor.RescaleJpgImage(binaryImgToRescale, 1000);
+            _preProcessor.SaveJpgImage(rescaledBinaryImg, "C:\\VirtualServer\\reuslts_meas\\PreProcessedTesseract\\4rescaledBinaryImg.jpg");
+
             // Step 4: Extract text data from preprocessed image
             // Step 5: Clean data
             // Step 6: Return report
@@ -261,6 +276,11 @@ namespace LabAssistantOCR.EngineOCR
                 Console.WriteLine("Not able to load image " + ex.Message);
                 return null;
             }
+        }
+
+        private void SavePixImage(Pix pixImg, string path)
+        {
+            pixImg.Save(path);
         }
 
 
