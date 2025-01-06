@@ -39,9 +39,6 @@ namespace LabAssistantOCR.ImgTestUI
 
         private void Show(string path)
         {
-            _reportEngine = new();
-            _reportEngine.GetReportFromImage_ImageWillBePreProcessed(path);
-            /*
             // Gettting raw data from image without preprocessing
             string rawdata = GetRawDataFromImage(path);
             ShowDataOnScreen(rawdata);
@@ -50,8 +47,6 @@ namespace LabAssistantOCR.ImgTestUI
             DataSample dataSample = new DataSample();
             dataSample = GetDatasampleFromImage(path);
             ShowReportOnScreen(dataSample);
-            */
-
         }
 
         private string GetRawDataFromImage(string path)
