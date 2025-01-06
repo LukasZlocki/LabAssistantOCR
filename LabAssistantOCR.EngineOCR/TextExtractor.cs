@@ -39,7 +39,7 @@ namespace LabAssistantOCR.EngineOCR
                 }
                 catch (Exception ex)
                 {
-                    return "Error during image text recognition. System error description: " + ex.Message;
+                    throw new ErrorHandler("Error during image text recognition. System error description: " + ex.Message);
                 }
             }
         }
