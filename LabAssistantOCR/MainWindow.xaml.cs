@@ -41,12 +41,20 @@ namespace LabAssistantOCR
 
         }
 
+        private DataSample GetDataFromPrepocessedimage(string path)
+        {
+            _reportEngine = new();
+            return _reportEngine.GetReportFromImage_ImageWillBePreProcessed(path);
+        }
+
+        // This method is absolete here ! 
         private string GetRawDataFromImage(string path)
         {
             _reportEngine = new();
             return _reportEngine.GetTextFromImage_NoPreprocessing(path);
         }
 
+        // This method is absolete here ! 
         private DataSample GetDatasampleFromImage(string path)
         { 
             return _reportEngine.GetReportFromImage_NoPreProcessing(path);

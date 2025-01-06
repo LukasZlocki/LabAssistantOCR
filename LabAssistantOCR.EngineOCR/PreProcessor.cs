@@ -1,4 +1,5 @@
 ﻿using Tesseract;
+using System.Drawing;
 
 namespace LabAssistantOCR.EngineOCR
 {
@@ -28,7 +29,12 @@ namespace LabAssistantOCR.EngineOCR
 
         }
 
-        private void SaveThisImg(Pix img, string fileName)
+        /// <summary>
+        /// Saving pix image as png
+        /// </summary>
+        /// <param name="img">Tesseract Pix format image</param>
+        /// <param name="fileName">Output filename</param>
+        public void SaveThisImg(Pix img, string fileName)
         {
             img.Save("C:\\VirtualServer\\reuslts_meas\\PreProcessed\\" + fileName, ImageFormat.Png);
         }
@@ -55,6 +61,90 @@ namespace LabAssistantOCR.EngineOCR
             string savePath = @"C:\VirtualServer\reuslts_meas\PreProcessed\binary_image.jpg";
             convertedToBinary.Save(savePath, ImageFormat.Jp2);
             return convertedToBinary;
+        }
+
+        public void CheckImageDimension(Pix img)
+        {
+            int width = img.Width;
+            int height = img.Height;
+
+            Console.WriteLine($"Width {width}");
+            Console.WriteLine($"Height {height}");
+        }
+
+        /// <summary>
+        /// Rescale Pix image to given width
+        /// </summary>
+        /// <param name="img">image in Tesseract Pix format</param>
+        /// <param name="userWidth">Future width of given image</param>
+        /// <returns>Rescaled image in Tesseract Pix format</returns>
+        public Pix RescaleImageToUserWidth(Pix img, int userWidth)
+        {
+            int newHeight = (img.Height * userWidth) / img.Width;
+
+            using (var engine = new TesseractEngine(@"./tessdata", "eng", EngineMode.Default))
+            {
+                using (var resizedImg = img.Scale(userWidth, newHeight))
+                {
+                    return resizedImg;
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// rescale jpg image
+        /// </summary>
+        /// <param name="img">Image as System.Drawing.Image object</param>
+        /// <param name="userWidth">Future width of given image</param>
+        /// <returns>Rescaled image as System.Drawing.Image object</returns>
+        public Image RescaleJpgImage(Image img, int userWidth)
+        {
+            int newHeight = (img.Height * userWidth) / img.Width;
+            Bitmap resizedImg = new Bitmap(userWidth, newHeight);
+
+            using (Graphics graphics = Graphics.FromImage(resizedImg))
+            {
+                graphics.DrawImage(img, 0, 0, userWidth, newHeight);
+            }
+            resizedImg.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            return resizedImg;
+        }
+
+        /// <summary>
+        /// Load jpg file from given path
+        /// </summary>
+        /// <param name="path">full path to image with folder name and file name</param>
+        /// <returns>System.Drawing.Image object</returns>
+        public Image LoadJpgImage(string path)
+        {
+            try
+            {
+                Image img = Image.FromFile(path);
+                return img;
+            }
+            catch (Exception ex) 
+            { 
+                Console.WriteLine("Error during loading the image: " + ex.Message);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Save image to specific path
+        /// </summary>
+        /// <param name="img">Image as System.Drawing.Image object</param>
+        /// <param name="savePath">full save path with folder name and file name</param>
+        public void SaveJpgImage(Image img, string savePath)
+        {
+            try
+            {
+                img.Save(savePath);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error during saving the image: " + ex.Message);
+            }
         }
 
 

@@ -1,4 +1,5 @@
-﻿using Tesseract;
+﻿using System.Drawing;
+using Tesseract;
 
 namespace LabAssistantOCR.EngineOCR
 {
@@ -68,17 +69,34 @@ namespace LabAssistantOCR.EngineOCR
             return _dataCleaner.GetCleanedReport();
         }
 
-        public DataSample GetReportFromImage_ImageWillBePreProcessed(string pathToImage)
+        public DataSample GetReportFromImage_ImageWillBePreProcessed(string path)
         {
 
             // Step 0: Load image from given path
+            Image img = _preProcessor.LoadJpgImage(path);
+
             // Step 1: Rescale the image
+            Image imgRescaled = _preProcessor.RescaleJpgImage(img, 1000);
+            _preProcessor.SaveJpgImage(imgRescaled, "C:\\VirtualServer\\reuslts_meas\\PreProcessedTesseract\\1rescaledImg.jpg");
+
+
             // Step 2: Convert image to gray
+
             // Step 3: Convert gray image to binary image
             // Step 4: Extract text data from preprocessed image
             // Step 5: Clean data
             // Step 6: Return report
+
+            return new DataSample
+            {
+                Date = Convert.ToString(DateTime.UtcNow),
+                um4 = "N/A",
+                um6 = "N/A",
+                um14 = "N/A"
+            };
+
         }
+
 
         public void ReadMachineReportImage_GrayOnly(string pathToImage, string fileName)
         {
@@ -225,6 +243,20 @@ namespace LabAssistantOCR.EngineOCR
                 return img;
             }
             catch(Exception ex)
+            {
+                Console.WriteLine("Not able to load image " + ex.Message);
+                return null;
+            }
+        }
+
+        private Pix LoadImage(string path)
+        {
+            try
+            {
+                Pix img = Pix.LoadFromFile(path);
+                return img;
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine("Not able to load image " + ex.Message);
                 return null;
