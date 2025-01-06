@@ -17,6 +17,12 @@ namespace LabAssistantOCR.EngineOCR
             }
         }
 
+        /// <summary>
+        /// Extract text from given path with image
+        /// </summary>
+        /// <param name="imagePath">Path to image </param>
+        /// <returns>String of signs red by OCR from given image</returns>
+        /// <exception cref="ErrorHandler"></exception>
         internal string ExtractTextFromLoadedImage(string imagePath)
         {
             using (var engine = new TesseractEngine(@"./tessdata", "eng", EngineMode.Default))
@@ -33,7 +39,6 @@ namespace LabAssistantOCR.EngineOCR
                 }
                 catch (Exception ex)
                 {
-                    //return "Error during image text recognition. System error description: " + ex.Message;
                     throw new ErrorHandler("Error during image text recognition. System error description: " + ex.Message);
                 }
             }
