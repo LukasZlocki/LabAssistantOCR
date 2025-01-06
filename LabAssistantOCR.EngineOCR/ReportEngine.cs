@@ -71,14 +71,13 @@ namespace LabAssistantOCR.EngineOCR
         }
 
 
+        /// <summary>
+        /// Preprocess given image for batter OCR accuracy along with reading and creating final report base on preprocessed image
+        /// </summary>
+        /// <param name="path">Path to image</param>
+        /// <returns>Final report as DataSample object</returns>
         public DataSample GetReportFromImage_ImageWillBePreProcessed(string path)
         {       
-            /*
-            // Step 1: Rescale the image
-            Image imgRescaled = _preProcessor.RescaleJpgImage(img, 1000);
-            _preProcessor.SaveJpgImage(imgRescaled, "C:\\VirtualServer\\reuslts_meas\\PreProcessedTesseract\\1rescaledImg.jpg");
-            */
-
             // Step 1: Load and convert orginal image to gray
             Pix imageToGray = LoadImage(path);
             Pix grayImg = _preProcessor.ConvertImageToGrey(imageToGray);
@@ -88,28 +87,53 @@ namespace LabAssistantOCR.EngineOCR
             Pix binaryImg = _preProcessor.ConvertImageToBinary(grayImg);
             binaryImg.Save("C:\\VirtualServer\\reuslts_meas\\PreProcessedTesseract\\2binaryImage.tif", ImageFormat.Tiff);
 
-            // Rescale grey image
+            // Step 3: Rescale gray image
             Image grayImgToRescale = _preProcessor.LoadJpgImage("C:\\VirtualServer\\reuslts_meas\\PreProcessedTesseract\\1grayImage.tif");
             Image rescaledGrayImg = _preProcessor.RescaleJpgImage(grayImgToRescale, 1000);
             _preProcessor.SaveJpgImage(rescaledGrayImg, "C:\\VirtualServer\\reuslts_meas\\PreProcessedTesseract\\3rescaledGrayImg.jpg");
 
-            // Rescale grey binary image
+            // Step 4: Rescale binary image
             Image binaryImgToRescale = _preProcessor.LoadJpgImage("C:\\VirtualServer\\reuslts_meas\\PreProcessedTesseract\\2binaryImage.tif");
             Image rescaledBinaryImg = _preProcessor.RescaleJpgImage(binaryImgToRescale, 1000);
             _preProcessor.SaveJpgImage(rescaledBinaryImg, "C:\\VirtualServer\\reuslts_meas\\PreProcessedTesseract\\4rescaledBinaryImg.jpg");
 
-            // Step 4: Extract text data from preprocessed image
-            // Step 5: Clean data
-            // Step 6: Return report
-
-            return new DataSample
+            // Step 4: Extract text data from preprocessed and rescaled binary image
+            string extractedText = "";
+            try
             {
-                Date = Convert.ToString(DateTime.UtcNow),
-                um4 = "N/A",
-                um6 = "N/A",
-                um14 = "N/A"
-            };
+                extractedText = _textExtractor.ExtractTextFromLoadedImage("C:\\VirtualServer\\reuslts_meas\\PreProcessedTesseract\\4rescaledBinaryImg.jpg");
+            }
+            catch (ErrorHandler ex)
+            {
+                new DataSample
+                {
+                    Date = Convert.ToString(DateTime.UtcNow),
+                    um4 = "N/A",
+                    um6 = "N/A",
+                    um14 = "N/A"
+                };
+            }
+            catch (Exception ex)
+            {
+                new DataSample
+                {
+                    Date = Convert.ToString(DateTime.UtcNow),
+                    um4 = "N/A",
+                    um6 = "N/A",
+                    um14 = "N/A"
+                };
+            }
 
+            // Step 5: Clean data
+            DataSample rawExtractedDataSample = new DataSample();
+            rawExtractedDataSample = _dataExtractor.DataExtractionToReport(extractedText);
+            // Add datasample set to data cleaner
+            _dataCleaner.AddDatasample(rawExtractedDataSample);
+            // Cleaning data samples
+            _dataCleaner.CleanDatasamples();
+
+            // Step 6: Return report
+            return _dataCleaner.GetCleanedReport();          
         }
 
 
